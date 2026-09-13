@@ -47,7 +47,7 @@ fun PantallaExplicacionInstrucciones(
             ) {
                 Text(text = "1. El objetivo se oculta aleatoriamente en un rumbo del mapa.", fontSize = 14.sp, color = Color.DarkGray)
                 Text(text = "2. Gira el dispositivo de forma física en círculos para escanear el bioma.", fontSize = 14.sp, color = Color.DarkGray)
-                Text(text = "3. El anillo de temperatura central flotará guiándote en tiempo real:\n\n • Izquierda: Rumbo incorrecto.\n\n • Centrado: Vas directo hacia él.", fontSize = 14.sp, color = Color.DarkGray)
+                Text(text = "3. El anillo de temperatura central flotará guiándote en tiempo real:\n\n • Izquierda: Rumbo incorrecto.\n\n • Derecha (Tibio): Te estás acercando.\n\n • Centrado: Vas directo hacia él.", fontSize = 14.sp, color = Color.DarkGray)
                 Text(text = "4. Al alinearte por completo en el área caliente, el personaje se revelará ganando la partida.", fontSize = 14.sp, color = Color.DarkGray)
                 Text(text = "5. Recuerda controlar el reloj superior: si la cuenta regresiva llega a cero antes de hallar el objetivo, perderás de forma automática la partida actual.", fontSize = 14.sp, color = Color.DarkGray)
                 Text(text = "6. Consigue bonificaciones especiales completando el mapa con la mayor velocidad y exactitud angular posibles.", fontSize = 14.sp, color = Color.DarkGray)

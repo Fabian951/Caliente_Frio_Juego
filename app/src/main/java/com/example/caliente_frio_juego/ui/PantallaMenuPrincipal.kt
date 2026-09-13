@@ -29,24 +29,31 @@ fun PantallaMenuPrincipal(
         Card(
             colors = CardDefaults.cardColors(containerColor = Color.White),
             shape = RoundedCornerShape(24.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
             modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)
         ) {
             Column(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier.padding(28.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
+                    text = "🧭",
+                    fontSize = 42.sp,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
                     text = "🔥 CALIENTE & FRÍO ❄️",
-                    fontSize = 28.sp,
+                    fontSize = 26.sp,
                     fontWeight = FontWeight.Black,
                     color = Color(0xFF1B4332),
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "¡Encuentra al personaje escondido!",
-                    fontSize = 14.sp,
-                    color = Color.Gray,
+                    text = "Busca el objetivo secreto girando tu dispositivo",
+                    fontSize = 13.sp,
+                    color = Color(0xFF52796F),
                     textAlign = TextAlign.Center
                 )
             }
@@ -56,7 +63,8 @@ fun PantallaMenuPrincipal(
             onClick = alAlcanzarJuego,
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1B4332)),
             shape = RoundedCornerShape(16.dp),
-            modifier = Modifier.fillMaxWidth().height(60.dp)
+            modifier = Modifier.fillMaxWidth().height(60.dp),
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
         ) {
             Text("🎮 INICIAR JUEGO", fontSize = 18.sp, fontWeight = FontWeight.Bold)
         }
@@ -70,7 +78,7 @@ fun PantallaMenuPrincipal(
             modifier = Modifier.fillMaxWidth().height(60.dp),
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
         ) {
-            Text("CÓMO JUGAR", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1B4332))
+            Text("📖 CÓMO JUGAR", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1B4332))
         }
     }
 }
