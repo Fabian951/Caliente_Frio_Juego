@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://android.com"
+    xmlns:app="http://android.com"
+    xmlns:tools="http://android.com"
+    android:id="@+id/layoutRaizJuego"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D8F3DC"
+    tools:ignore="HardcodedText">
+
+    <!-- BARRA SUPERIOR: Temporizador y Puntos -->
+    <LinearLayout
+        android:id="@+id/barraSuperior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card_blanca"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:id="@+id/txtTemporizador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⏱️ 00:45"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#1B4332"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_blanca"
+            android:padding="6dp"
+            android:gravity="center"
+            android:minWidth="70dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puntos"
+                android:textSize="11sp"
+                android:textColor="#555555" />
+            <TextView
+                android:id="@+id/txtPuntos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="350"
+                android:textStyle="bold"
+                android:textColor="#1B4332"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- INSTRUCCIONES -->
+    <LinearLayout
+        android:id="@+id/cardInstrucciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/bg_card_blanca"
+        android:padding="12dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/barraSuperior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧭 Gira tu teléfono para buscar al personaje"
+            android:textSize="14sp"
+            android:textColor="#1B4332"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <!-- ÁREA CENTRAL DEL PAISAJE (Fondo Verde con Radar) -->
+    <FrameLayout
+        android:id="@+id/contenedorPaisaje"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="16dp"
+        android:background="#40916C"
+        app:layout_constraintTop_toBottomOf="@id/cardInstrucciones"
+        app:layout_bottomToTopOf="@id/cardPista">
+
+        <!-- Círculo del Radar / Brújula Simulado -->
+        <View
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:layout_gravity="center"
+            android:background="@android:drawable/presence_video_online"
+            android:backgroundTint="#2D6A4F" />
+
+        <!-- Texto de estado central dinámico -->
+        <TextView
+            android:id="@+id/txtEstadoCentral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="BUSCANDO..."
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:shadowColor="#000000"
+            android:shadowRadius="6"/>
+    </FrameLayout>
+
+    <!-- PISTA DE ORIENTACIÓN -->
+    <LinearLayout
+        android:id="@+id/cardPista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/bg_card_blanca"
+        android:padding="12dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_bottomToTopOf="@id/contenedorDistancia">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💡 PISTA"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:textSize="11sp" />
+        <TextView
+            android:id="@+id/txtTextoPista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="El objetivo está oculto en el bosque"
+            android:textColor="#1B4332"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- BARRA INFERIOR DE TEMPERATURA -->
+    <LinearLayout
+        android:id="@+id/contenedorDistancia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1B4332"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_bottomtoBottomOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DISTANCIA APROXIMADA"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="11sp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Línea térmica multicolor -->
+        <View
+            android:id="@+id/barraTermica"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:background="@drawable/gradient_temperatura" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muy frío"
+                android:textColor="#74C69D"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tibio"
+                android:textColor="#FFB703"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡Caliente!"
+                android:textColor="#FF4D4D"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

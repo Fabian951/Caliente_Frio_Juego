@@ -18,12 +18,18 @@ import kotlinx.coroutines.launch
 const val LIMITE_TIEMPO_MILLIS = 30_000L // cada grupo define el tiempo; 30s de ejemplo
 
 // "cajita" que agrupa TODO lo que la pantalla necesita mostrar en un momento dado
+// "cajita" que agrupa TODO lo que la pantalla necesita mostrar en un momento dado
+// Agrega la propiedad azimut al final de tu Estado de la UI
 data class EstadoUiJuego(
     val estadoJuego: EstadoJuego = EstadoJuego.INACTIVO,
     val temperatura: EstadoTemperatura = EstadoTemperatura.FRIO,
     val tiempoRestanteMillis: Long = LIMITE_TIEMPO_MILLIS,
-    val resultado: ResultadoJuego? = null
+    val resultado: ResultadoJuego? = null,
+    val tipoMapa: String = "BOSQUE",
+    val azimut: Float = 0f // <-- AGREGA ESTA LÍNEA AQUÍ
 )
+
+
 
 class JuegoViewModel(
     private val proveedorOrientacion: ProveedorOrientacion
@@ -72,12 +78,14 @@ class JuegoViewModel(
         if (_estadoUi.value.estadoJuego != EstadoJuego.JUGANDO) return
 
         val temperatura = logicaJuego.obtenerEstadoTemperatura(azimutActual)
-        _estadoUi.value = _estadoUi.value.copy(temperatura = temperatura)
+        // Modifica esta línea para enviarle el azimut real a la interfaz:
+        _estadoUi.value = _estadoUi.value.copy(temperatura = temperatura, azimut = azimutActual)
 
         if (logicaJuego.objetivoEncontrado(azimutActual)) {
             terminarJuego(gano = true)
         }
     }
+
 
     private fun terminarJuego(gano: Boolean) {
         trabajoSensor?.cancel()

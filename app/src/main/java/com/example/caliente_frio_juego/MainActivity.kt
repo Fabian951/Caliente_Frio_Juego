@@ -4,15 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.caliente_frio_juego.sensors.ProveedorOrientacion
 import com.example.caliente_frio_juego.ui.PantallaJuego
+import com.example.caliente_frio_juego.ui.PantallaMenuPrincipal
+import com.example.caliente_frio_juego.ui.PantallaExplicacionInstrucciones
 import com.example.caliente_frio_juego.ui.theme.Caliente_Frio_JuegoTheme
 import com.example.caliente_frio_juego.viewmodel.JuegoViewModel
 
+// La fábrica declarada de forma correcta en el mismo paquete para evitar fallos de referencia
 class FabricaJuegoViewModel(private val proveedorOrientacion: ProveedorOrientacion) :
     ViewModelProvider.Factory {
     override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
@@ -35,11 +37,25 @@ class MainActivity : ComponentActivity() {
                 )
                 val estadoUi by viewModel.estadoUi.collectAsState()
 
-                PantallaJuego(
-                    estadoUi = estadoUi,
-                    alIniciar = { viewModel.iniciarJuego() },
-                    alReiniciar = { viewModel.reiniciarJuego() }
-                )
+                var pantallaActual by remember { mutableStateOf("MENU") }
+
+                when (pantallaActual) {
+                    "MENU" -> PantallaMenuPrincipal(
+                        alAlcanzarJuego = {
+                            viewModel.iniciarJuego()
+                            pantallaActual = "JUEGO"
+                        },
+                        alAlcanzarInstrucciones = { pantallaActual = "INSTRUCCIONES" }
+                    )
+                    "INSTRUCCIONES" -> PantallaExplicacionInstrucciones(
+                        alVolverAlMenu = { pantallaActual = "MENU" }
+                    )
+                    "JUEGO" -> PantallaJuego(
+                        estadoUi = estadoUi,
+                        alIniciar = { viewModel.iniciarJuego() },
+                        alReiniciar = { viewModel.reiniciarJuego() }
+                    )
+                }
             }
         }
     }
